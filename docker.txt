@@ -1,0 +1,12 @@
+docker network create my-network
+
+docker run -d --name mysql-container --network my-network \
+  -e MYSQL_ROOT_PASSWORD=Rajan@123 -e MYSQL_DATABASE=ramdb mysql:8.0
+
+docker run -d --name springbackend --network my-network \
+  -e SPRING_DATASOURCE_URL=jdbc:mysql://mysql-container:3306/ramdb \
+  -e SPRING_DATASOURCE_USERNAME=root \
+  -e SPRING_DATASOURCE_PASSWORD=Rajan@123 \
+  -p 8080:8080 springbackend:v1
+
+    
